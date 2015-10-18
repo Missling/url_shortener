@@ -1,0 +1,31 @@
+<h1 class='center'>URL Shortener</h1>
+<div class='center'>
+
+  <%= form_for @urlmapper do |f| %>
+    <p>
+      <%= f.label :Original_URL %>
+      <%= f.text_field :original_url %>
+    </p>
+
+    <p>
+      <%= f.submit "Shorten URL"%>
+    </p>
+  <% end %>
+
+  <table>
+    <tr>
+      <td>Original URL</td>
+      <td>Shortened URL</td>
+      <td>Visited Count</td>
+    </tr>
+    <% @urlmappers.each do |url| %>
+      <tr>
+        <td><%= url.original_url %></td>
+        <!-- "#{@base}#{url.url_key}" -->
+        <!-- link_to takes in html property in a hash, target: "_blank" opens the link in a new tab -->
+        <td><%= link_to(@base + url.url_key, @base + url.url_key, { target: "_blank" } ) %></td>
+        <td><%= url.count %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
